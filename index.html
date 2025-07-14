@@ -1,1 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XzetVictus Project - Simulasi Pengirim Pesan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a cleaner look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        .phone-mockup {
+            background-color: #000;
+            border-radius: 2.5rem; /* More rounded corners for phone frame */
+            padding: 0.75rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px; /* Max width for mobile view */
+            height: 80vh; /* Responsive height */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Hide overflow for content inside */
+            position: relative;
+        }
+        .screen {
+            background-color: #2d3748; /* Darker screen background */
+            border-radius: 2rem; /* Rounded corners for the screen itself */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        .header {
+            background-color: #1a202c;
+            padding: 1rem 1.5rem;
+            border-top-left-radius: 2rem;
+            border-top-right-radius: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #cbd5e0;
+            font-weight: 600;
+        }
+        .content-card {
+            background: linear-gradient(135deg, #2d3748, #4a5568); /* Gradient background for the main card */
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            flex-grow: 1; /* Allow card to grow */
+            justify-content: center; /* Center content vertically */
+        }
+        input[type="text"] {
+            background-color: #4a5568;
+            border: 1px solid #6b7280;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #e2e8f0;
+            width: 100%;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: #63b3ed; /* Blue border on focus */
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #63b3ed, #4299e1); /* Blue gradient */
+            color: white;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #4299e1, #3182ce);
+            transform: translateY(-1px);
+        }
+        .btn-logout {
+            background-color: #ef4444; /* Red for logout */
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            border-radius: 0.5rem;
+        }
+        .btn-logout:hover {
+            background-color: #dc2626;
+        }
+        .info-text {
+            font-size: 0.875rem;
+            color: #a0aec0;
+            margin-top: 1rem;
+        }
+        .message-box {
+            background-color: #2d3748;
+            border: 1px solid #4a5568;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            color: #e2e8f0;
+            text-align: left;
+            display: none; /* Hidden by default */
+            word-wrap: break-word; /* Ensure long messages wrap */
+        }
+        .message-box.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-mockup">
+        <div class="screen">
+            <div class="header">
+                <span>XzetVictus Project</span>
+                <button id="logoutBtn" class="btn-logout">Logout</button>
+            </div>
+            <div class="content-card">
+                <h1 class="text-3xl font-bold text-white mb-4">XZET • VICTUS</h1>
 
+                <!-- Input for Target Number -->
+                <input type="text" id="targetNumber" placeholder="Masukkan nomor target (contoh: 6281234567890)">
+
+                <!-- Input for Message -->
+                <input type="text" id="messageInput" placeholder="Masukkan pesan yang akan dikirim (contoh: Halo bang)">
+
+                <!-- Simulated Action Buttons (not functional as per safety guidelines) -->
+                <div class="grid grid-cols-2 gap-4">
+                    <button class="btn btn-primary opacity-50 cursor-not-allowed">Jumlah Bug (Simulasi)</button>
+                    <button class="btn btn-primary opacity-50 cursor-not-allowed">Crash Android (Simulasi)</button>
+                    <button class="btn btn-primary opacity-50 cursor-not-allowed">Crash iPhone (Simulasi)</button>
+                    <button class="btn btn-primary opacity-50 cursor-not-allowed">Fitur Lain (Simulasi)</button>
+                </div>
+
+                <!-- Send Message Button -->
+                <button id="sendMessageBtn" class="btn btn-primary mt-4">Kirim Pesan (Simulasi)</button>
+
+                <!-- Message Box for Simulation Output -->
+                <div id="simulationMessageBox" class="message-box">
+                    <p class="font-semibold mb-2">Status Simulasi:</p>
+                    <p id="simulationMessageText"></p>
+                </div>
+
+                <div class="info-text">
+                    <p>Status: Server Aktif ✅</p>
+                    <p>Info: Selamat datang, Bancet Legend!</p>
+                    <p>© 2025 XzetVictus Inc.</p>
+                    <p>Thanks to: BancetMyself</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sendMessageBtn = document.getElementById('sendMessageBtn');
+            const targetNumberInput = document.getElementById('targetNumber');
+            const messageInput = document.getElementById('messageInput');
+            const simulationMessageBox = document.getElementById('simulationMessageBox');
+            const simulationMessageText = document.getElementById('simulationMessageText');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            // Handle Send Message Button Click
+            sendMessageBtn.addEventListener('click', () => {
+                const targetNumber = targetNumberInput.value.trim();
+                const message = messageInput.value.trim();
+
+                if (targetNumber === '' || message === '') {
+                    simulationMessageText.textContent = 'Nomor target dan pesan tidak boleh kosong!';
+                    simulationMessageBox.classList.add('show');
+                    simulationMessageBox.style.backgroundColor = '#ef4444'; /* Red for error */
+                    simulationMessageBox.style.borderColor = '#b91c1c';
+                } else {
+                    simulationMessageText.innerHTML = `Pesan simulasi berhasil "dikirim" ke nomor: <span class="font-bold">${targetNumber}</span> dengan pesan: "<span class="italic">${message}</span>".<br><br>Ini adalah simulasi dan tidak mengirim pesan sungguhan.`;
+                    simulationMessageBox.classList.add('show');
+                    simulationMessageBox.style.backgroundColor = '#2d3748'; /* Default dark background */
+                    simulationMessageBox.style.borderColor = '#4a5568';
+                    // Clear inputs after simulated send
+                    targetNumberInput.value = '';
+                    messageInput.value = '';
+                }
+            });
+
+            // Handle Logout Button Click
+            logoutBtn.addEventListener('click', () => {
+                alert('Anda telah keluar dari simulasi aplikasi.'); // Using alert for simplicity in simulation
+                // In a real app, this would redirect to a login page or clear session data.
+            });
+
+            // Hide message box when inputs are focused again
+            targetNumberInput.addEventListener('focus', () => {
+                simulationMessageBox.classList.remove('show');
+            });
+            messageInput.addEventListener('focus', () => {
+                simulationMessageBox.classList.remove('show');
+            });
+        });
+    </script>
+</body>
+</html>
